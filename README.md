@@ -1,4 +1,1 @@
-git-folder
-==========
-
-Consists of various projects I keep working on a day-to-day basis.
+My pet projects which I work on a daily basis
