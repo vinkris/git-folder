@@ -1,3 +1,0 @@
-[submodule "datascience"]
-	path = datascience
-	url = https://github.com/uwescience/datasci_course_materials.git
