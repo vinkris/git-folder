@@ -10,7 +10,7 @@ using namespace std;
 
 #define all(v) (v).begin(), (v).end()
 
-typedef struct Task
+struct Task
 {
    int timestamp;
    int pages;
@@ -26,12 +26,12 @@ typedef struct Task
        return currTime-timestamp;
    }
 
-}PrintTask;
+};
 
-typedef struct Printer
+struct Printer
 {
    int ppm;
-   PrintTask *task;
+   Task *task;
    int timeRemaining;
 
    Printer(int ppm)
@@ -57,18 +57,18 @@ typedef struct Printer
 
    }
 
-   void startNext(PrintTask *task)
+   void startNext(Task *task)
    {
        this->task = task;
        this->timeRemaining = task->pages * 60/this->ppm;
    }
    
-}Printer;
+};
 
 void simulation(int seconds, int students, int tasksperstudentperhour, int ppm, int avgPages)
 {
    Printer printer(ppm);
-   queue<PrintTask> Q;
+   queue<Task> Q;
    vector<int> waitingTimes;   
    int secsPerTask = 3600/(students*tasksperstudentperhour);
 
@@ -76,12 +76,12 @@ void simulation(int seconds, int students, int tasksperstudentperhour, int ppm, 
    {
       if( ((rand()%secsPerTask)+1) == secsPerTask)
       {
-          Q.push(PrintTask(i, rand()%(avgPages+1)));
+          Q.push(Task(i, rand()%(avgPages+1)));
       }
 
       if (!printer.isBusy() && !Q.empty())
       {
-          PrintTask *task = &Q.front();
+          Task *task = &Q.front();
           waitingTimes.push_back(task->waitTime(i));
           printer.startNext(task);
           Q.pop();
